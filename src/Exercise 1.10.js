@@ -7,6 +7,12 @@ const Statistic = ({text, number}) => {
   )
 }
 
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>
+    {text}
+  </button>
+)
+
 const App = () => {
   // save clicks of each button to own state
   const [good, setGood] = useState(0)
@@ -50,16 +56,18 @@ const App = () => {
   return (
     <div>
       <h1>Give feedback</h1>
-      <button onClick={handleGoodFeedback}>Good</button>
-      <button onClick={handleNeutralFeedback}>Neutral</button>
-      <button onClick={handleBadFeedback}>Bad</button>
+      <Button onClick={handleGoodFeedback} text="Good" />
+      <Button onClick={handleNeutralFeedback} text="Neutral" />
+      <Button onClick={handleBadFeedback} text="Bad" />
       <h1>Statistics</h1>
-      {good+bad+neutral === 0 ? "No feedback given" : <Statistic text="Good feedback:" number={good} />}
-      {good+bad+neutral === 0 ? "" : <Statistic text="Neutral feedback:" number={neutral} />}
-      {good+bad+neutral === 0 ? "" : <Statistic text="Bad feedback:" number={bad} />}
-      {good+bad+neutral === 0 ? "" : <Statistic text="All feedback:" number={all} />}
-      {good+bad+neutral === 0 ? "" : <Statistic text="Average:" number={average} />}
-      {good+bad+neutral === 0 ? "" : <Statistic text="Positive:" number={positive} />}
+      {good+bad+neutral === 0 ? "No feedback given" : <>
+      <Statistic text="Good feedback:" number={good} />
+      <Statistic text="Neutral feedback:" number={neutral} />
+      <Statistic text="Bad feedback:" number={bad} />
+      <Statistic text="All feedback:" number={all} />
+      <Statistic text="Average:" number={average} />
+      <Statistic text="Positive:" number={positive} />
+      </>}
     </div>
   )
 }
