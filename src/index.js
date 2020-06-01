@@ -1,71 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const App = () => {
-  const course = {
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7
-      },
-      {
-        name: 'State of a component',
-        exercises: 14
-      }
-    ]
+  // save clicks of each button to own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+  const handleGoodFeedback = () => {
+    setGood(good + 1)
   }
-
-  const Header = (props) => {
-    return (
-      <div>
-        <h1>
-          {props.course.name}
-        </h1>
-      </div>
-    )
+  const handleNeutralFeedback = () => {
+    setNeutral(neutral + 1)
   }
-
-  const TextContent = (props) => {
-    return (
-        <p>
-          {props.name} {props.exercises}
-        </p>
-    )
-  }
-
-  const Content = (props) => {
-    return (
-      <div>
-        <TextContent {...props.course.parts[0]} />
-        <TextContent {...props.course.parts[1]} />
-        <TextContent {...props.course.parts[2]} />
-      </div>
-    )
-  }
-
-  const Total = (props) => {
-    const total = props.course.parts[0].exercises + props.course.parts[1].exercises + props.course.parts[2].exercises
-    return (
-      <div>
-        <p>
-        Number of exercises {total}
-        </p>
-      </div>
-    )
+  const handleBadFeedback = () => {
+    setBad(bad + 1)
   }
 
   return (
     <div>
-      <Header course={course}/>
-      <Content course={course}/>
-      <Total course={course} />
+      <h1>Give feedback</h1>
+      <button onClick={handleGoodFeedback}>Good</button>
+      <button onClick={handleNeutralFeedback}>Neutral</button>
+      <button onClick={handleBadFeedback}>Bad</button>
+      <h1>Statistics</h1>
+      <div>Good feedback: {good}</div>
+      <div>Neutral feedback: {neutral}</div>
+      <div>Bad feedback: {bad}</div>
     </div>
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App />, 
+  document.getElementById('root')
+)
